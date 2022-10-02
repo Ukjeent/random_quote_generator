@@ -64,7 +64,7 @@ function printQuote() {
   document.getElementById('quote-box').innerHTML = quote;
   changeBgColor();
   clearInterval(changeQuote);
-  changeQuote = setInterval(printQuote, 3000);
+  changeQuote = setInterval(printQuote, 10000);
 }
 
 // Checks if a property is empty or not and prints the object if the property is not empty.
