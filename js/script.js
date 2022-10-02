@@ -1,16 +1,5 @@
-/******************************************
-Treehouse FSJS Techdegree:
-project 1 - A Random Quote Generator
-******************************************/
 
-// For assistance: 
-  // Check the "Project Resources" section of the project instructions
-  // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
-
-/*** 
- * `quotes` array 
-***/
-
+// Array of quotes
 const quotes = [
   {
     quote: "The greatest glory in living lies not in never falling, but in rising every time we fall.",
@@ -50,14 +39,19 @@ const quotes = [
 ];
 
 
-// Gets a random quote from the quote array and returns the quote. 
+// Gets a random quote from the quotes array and returns the quote. 
 function getRandomQuote() {
   const randomNumb = Math.floor( Math.random() * (quotes.length) );
   const randomQuote = quotes[randomNumb];
   return randomQuote;
 }
 
-// Creates a 
+// Calls the rprintQuote function every 10sec.
+let changeQuote = setInterval(printQuote, 10000);
+
+// Calls the getRandomQuote function and prints the quote. 
+// Calls the changeBgColor function to change the background color.
+// Clears the chang quote interval and adds a new intervaltimer so the quote doesn't change right after a button click  
 function printQuote() {
   const randomQuote = getRandomQuote();
   let quote = `
@@ -68,8 +62,12 @@ function printQuote() {
       ${chechIfEmpty(randomQuote.tags, 'citation')}
       </p>`;
   document.getElementById('quote-box').innerHTML = quote;
+  changeBgColor();
+  clearInterval(changeQuote)
+  changeQuote = setInterval(printQuote, 3000);
 }
 
+// Checks if a property is empty or not and prints the object if the property is not empty.
 function chechIfEmpty(rQuote, spanClass) {
   if (rQuote !== '') {
     return `<span class="${spanClass}">${rQuote}</span>`;
@@ -78,15 +76,19 @@ function chechIfEmpty(rQuote, spanClass) {
   }
 }
 
-
+// Changes the background color of the quote-box and container to a random color. 
 function changeBgColor() {
   const quoteBox = document.getElementById('quote-box');
-  quoteBox.style.backgroundColor = 
+  const container = document.querySelector('.container');
+  const randomColor = Math.floor(Math.random()*16777215).toString(16);
+  quoteBox.style.backgroundColor = `#${randomColor}`;
+  container.style.backgroundColor = `#${randomColor}`;
 }
+
+
 
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
 ***/
-
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
