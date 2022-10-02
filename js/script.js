@@ -63,7 +63,7 @@ function printQuote() {
       </p>`;
   document.getElementById('quote-box').innerHTML = quote;
   changeBgColor();
-  clearInterval(changeQuote)
+  clearInterval(changeQuote);
   changeQuote = setInterval(printQuote, 3000);
 }
 
